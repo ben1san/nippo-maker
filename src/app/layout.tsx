@@ -1,20 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import Script from "next/script"; // ← 1. これを追加
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Nippo Maker",
+  title: "Nippo Maker 🚀",
+  description: "AIが日報を自動生成するツール",
 };
 
 export default function RootLayout({
@@ -23,10 +17,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="ja">
+      <head>
+        {/* 2. AdSenseのコードをここに配置 */}
+        <Script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9283569995882245`}
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      </head>
+      <body className={inter.className}>
         {children}
         <Toaster />
       </body>
